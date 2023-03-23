@@ -4,9 +4,10 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.headerInner}>
-                <h1>Search For Books</h1>
+                <h1>Search for Books</h1>
                 <div className={styles.findField}>
                     <input type="text" />
+                    <img src="/assets/img/icons/search.svg" alt="search" />
                 </div>
                 <div className={styles.filters}>
                     <div className={styles.categories}>
