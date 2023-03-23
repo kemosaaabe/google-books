@@ -1,3 +1,18 @@
 .header {
-    color: pink;
+    background: url('../../../public/assets/img/headerBg.jpg') no-repeat center;
+    background-size: cover;
+    color: #fff;
+
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    font-family: 'Raleway', sans-serif;
+
+    &Inner {
+        border: 1px solid black;
+        width: 50%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
 }
