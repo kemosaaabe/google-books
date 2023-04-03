@@ -1,7 +1,11 @@
 import Header from './layout/Header';
 
 function App() {
-    return <Header />;
+    return (
+        <>
+            <Header />
+        </>
+    );
 }
 
 export default App;

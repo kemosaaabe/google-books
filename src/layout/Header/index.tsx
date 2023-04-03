@@ -1,13 +1,11 @@
 import React from 'react';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import styles from './Header.module.scss';
 import { fetchBooks } from '../../slices/booksSlice';
 
 const Header = () => {
     const dispatch = useDispatch<any>();
-    const books = useSelector((state: any) => state.books.books);
     const [findValue, setFindValue] = React.useState('');
 
     return (
