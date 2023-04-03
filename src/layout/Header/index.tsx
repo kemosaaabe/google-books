@@ -10,7 +10,7 @@ const Header = () => {
     const onFind = async () => {
         try {
             const { data } = await axios.get(
-                `https://www.googleapis.com/books/v1/volumes?q=${findValue}&key=${REACT_APP_API_KEY}`
+                `https://www.googleapis.com/books/v1/volumes?q=${findValue}+intitle:${findValue}&key=${REACT_APP_API_KEY}`
             );
             console.log(data);
         } catch (error) {
