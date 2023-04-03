@@ -1,5 +1,8 @@
-import axios from 'axios';
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import booksReducer from '../slices/booksSlice';
 
-const { REACT_APP_API_KEY } = process.env;
-
+export default configureStore({
+    reducer: {
+        books: booksReducer,
+    },
+});

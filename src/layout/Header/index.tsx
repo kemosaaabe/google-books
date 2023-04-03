@@ -1,22 +1,14 @@
 import React from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './Header.module.scss';
+import { fetchBooks } from '../../slices/booksSlice';
 
 const Header = () => {
-    const { REACT_APP_API_KEY } = process.env;
-
+    const dispatch = useDispatch<any>();
+    const books = useSelector((state: any) => state.books.books);
     const [findValue, setFindValue] = React.useState('');
-    const onFind = async () => {
-        try {
-            const { data } = await axios.get(
-                `https://www.googleapis.com/books/v1/volumes?q=${findValue}+intitle:${findValue}&key=${REACT_APP_API_KEY}`
-            );
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
 
     return (
         <header className={styles.header}>
@@ -33,7 +25,7 @@ const Header = () => {
                     <img
                         src="/assets/img/icons/search.svg"
                         alt="search"
-                        onClick={onFind}
+                        onClick={() => dispatch(fetchBooks(findValue))}
                     />
                 </div>
                 <div className={styles.filters}>
