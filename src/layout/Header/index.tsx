@@ -8,6 +8,11 @@ const Header = () => {
     const dispatch = useDispatch<any>();
     const [findValue, setFindValue] = React.useState('');
 
+    const getBooks = () => {
+        dispatch(fetchBooks(findValue));
+        setFindValue('');
+    };
+
     return (
         <header className={styles.header}>
             <div className={styles.headerInner}>
@@ -23,7 +28,7 @@ const Header = () => {
                     <img
                         src="/assets/img/icons/search.svg"
                         alt="search"
-                        onClick={() => dispatch(fetchBooks(findValue))}
+                        onClick={getBooks}
                     />
                 </div>
                 <div className={styles.filters}>
