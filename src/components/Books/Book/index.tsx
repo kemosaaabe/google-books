@@ -1,22 +1,40 @@
 import React, { FC } from 'react';
+import { Volume } from '../../../types/book';
+import { IconBook } from './icon';
+
+import styles from './Book.module.scss';
 
 interface BookProps {
-    imageUrl: string;
-    genre: string;
-    author: string;
-    title: string;
+    volumeInfo: Volume;
 }
 
-const Book: FC<BookProps> = () => {
+const Book: FC<BookProps> = ({ volumeInfo }) => {
     return (
-        <div>
-            <div className="img">
-                <img src="" alt="" />
+        <div className={styles.book}>
+            <div className={styles.img}>
+                {volumeInfo.imageLinks ? (
+                    <img
+                        src={volumeInfo.imageLinks.thumbnail}
+                        alt="book cover"
+                    />
+                ) : (
+                    <div className={styles.blankImage}>
+                        <IconBook />
+                    </div>
+                )}
             </div>
-            <div className="genre"></div>
-            <div className="info">
-                <div className="author"></div>
-                <div className="title"></div>
+            <div className={styles.genre}>
+                {volumeInfo.categories
+                    ? volumeInfo.categories.join(', ')
+                    : 'No categories'}
+            </div>
+            <div className={styles.info}>
+                <div className={styles.author}>
+                    {volumeInfo.authors
+                        ? volumeInfo.authors.join(', ')
+                        : 'No author'}
+                </div>
+                <div className={styles.title}>{volumeInfo.title}</div>
             </div>
         </div>
     );

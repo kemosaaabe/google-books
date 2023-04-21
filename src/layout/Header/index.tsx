@@ -1,11 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import styles from './Header.module.scss';
 import { fetchBooks } from '../../feautures/booksSlice';
+import { useAppDispatch } from '../../app/hooks';
 
 const Header = () => {
-    const dispatch = useDispatch<any>();
+    const dispatch = useAppDispatch();
     const [findValue, setFindValue] = React.useState('');
 
     const getBooks = () => {
@@ -23,6 +23,9 @@ const Header = () => {
                         value={findValue}
                         onChange={(e: React.FormEvent<HTMLInputElement>) => {
                             setFindValue(e.currentTarget.value);
+                        }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') getBooks();
                         }}
                     />
                     <img

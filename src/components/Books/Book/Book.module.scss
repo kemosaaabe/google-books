@@ -1,0 +1,51 @@
+.book {
+    padding: 25px 15px;
+    background-color: #fff;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    .img {
+        align-self: center;
+        height: 197px;
+        display: flex;
+        align-items: center;
+
+        img {
+            border-radius: 8px;
+            box-shadow: 8px 8px 9px -1px rgba(0, 0, 0, 0.15);
+        }
+
+        .blankImage {
+            width: 150px;
+            height: 197px;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        margin-bottom: 25px;
+    }
+
+    .genre {
+        margin-bottom: 8px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 12px;
+    }
+
+    .info {
+        .author {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            font-size: 14px;
+        }
+    }
+}
