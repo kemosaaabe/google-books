@@ -1,5 +1,3 @@
-import { motion, AnimatePresence } from 'framer-motion';
-
 import { useAppSelector } from '../../app/hooks';
 import styles from './Books.module.scss';
 
@@ -13,18 +11,11 @@ const Books = () => {
     return (
         <Container>
             <div className={styles.booksWrapper}>
-                <AnimatePresence>
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                    >
-                        <div className={styles.books}>
-                            {books.map((book: GoogleBook) => (
-                                <Book volumeInfo={book.volumeInfo} />
-                            ))}
-                        </div>
-                    </motion.div>
-                </AnimatePresence>
+                <div className={styles.books}>
+                    {books.map((book: GoogleBook) => (
+                        <Book volumeInfo={book.volumeInfo} />
+                    ))}
+                </div>
             </div>
         </Container>
     );

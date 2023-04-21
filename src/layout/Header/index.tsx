@@ -28,6 +28,7 @@ const Header = () => {
                             if (e.key === 'Enter') getBooks();
                         }}
                     />
+
                     <img
                         src="/assets/img/icons/search.svg"
                         alt="search"
