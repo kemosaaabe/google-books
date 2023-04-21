@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import styles from './Header.module.scss';
-import { fetchBooks } from '../../slices/booksSlice';
+import { fetchBooks } from '../../feautures/booksSlice';
 
 const Header = () => {
     const dispatch = useDispatch<any>();
