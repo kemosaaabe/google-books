@@ -36,11 +36,15 @@ const booksSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers(builder) {
-        builder.addCase(fetchBooks.fulfilled, (state, action) => {
-            state.status = 'succeeded';
-            state.books = state.books.concat(action.payload.items);
-            state.totalItems = action.payload.totalItems;
-        });
+        builder
+            .addCase(fetchBooks.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.books = action.payload.items;
+                state.totalItems = action.payload.totalItems;
+            })
+            .addCase(fetchBooks.pending, (state) => {
+                state.status = 'pending';
+            });
     },
 });
 
