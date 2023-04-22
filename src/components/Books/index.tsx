@@ -109,9 +109,14 @@ const Books = () => {
                             ))}
                         </div>
                     ) : (
-                        <p className={styles.text}>
-                            Ой... кажется книжек с таким названием нет :(
-                        </p>
+                        <>
+                            <p className={styles.text}>
+                                Ой... кажется книжек с таким названием нет :(
+                            </p>
+                            <div className={styles.img}>
+                                <img src="/assets/img/nobooks.jpg" alt="book" />
+                            </div>
+                        </>
                     )}
                 </div>
             </Container>
@@ -120,6 +125,9 @@ const Books = () => {
     return (
         <div className={styles.booksWrapper}>
             <p className={styles.text}>Напишите свой первый запросик</p>
+            <div className={styles.img}>
+                <img src="/assets/img/write.jpg" alt="book" />
+            </div>
         </div>
     );
 };
