@@ -1,5 +1,6 @@
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import styles from './Books.module.scss';
+import { fetchMoreBooks } from '../../feautures/booksSlice';
 
 import Container from '../Container';
 import Book from './Book';
@@ -7,6 +8,7 @@ import { GoogleBook } from '../../types/book';
 import ContentLoader from 'react-content-loader';
 
 const Books = () => {
+    const dispatch = useAppDispatch();
     const books = useAppSelector((state) => state.books.books);
     const status = useAppSelector((state) => state.books.status);
     const totalItems = useAppSelector((state) => state.books.totalItems);
@@ -15,7 +17,24 @@ const Books = () => {
         return (
             <Container>
                 <div className={styles.booksWrapper}>
+                    {books.length ? (
+                        <h2 className={styles.total}>
+                            Найдено книг: {totalItems}
+                        </h2>
+                    ) : null}
                     <div className={styles.books}>
+                        {books.length ? (
+                            <>
+                                {books.map(
+                                    (book: GoogleBook, index: number) => (
+                                        <Book
+                                            key={index}
+                                            volumeInfo={book.volumeInfo}
+                                        />
+                                    )
+                                )}
+                            </>
+                        ) : null}
                         {[...new Array(8)].map((item, index) => (
                             <ContentLoader
                                 rtl
@@ -61,6 +80,18 @@ const Books = () => {
                                     )
                                 )}
                             </div>
+                            <button
+                                onClick={() =>
+                                    dispatch(
+                                        fetchMoreBooks({
+                                            findValue: 'java',
+                                            startIndex: books.length,
+                                        })
+                                    )
+                                }
+                            >
+                                Загрузить еще
+                            </button>
                         </>
                     ) : (
                         <>
