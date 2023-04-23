@@ -9,6 +9,7 @@ const Header = () => {
     const [findValue, setFindValue] = React.useState('');
 
     const getBooks = () => {
+        if (!findValue) return;
         dispatch(fetchBooks(findValue));
         setFindValue('');
     };

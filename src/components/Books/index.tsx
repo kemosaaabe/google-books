@@ -9,6 +9,7 @@ import ContentLoader from 'react-content-loader';
 const Books = () => {
     const books = useAppSelector((state) => state.books.books);
     const status = useAppSelector((state) => state.books.status);
+    const totalItems = useAppSelector((state) => state.books.totalItems);
 
     if (status === 'pending')
         return (
@@ -46,14 +47,21 @@ const Books = () => {
             <Container>
                 <div className={styles.booksWrapper}>
                     {books ? (
-                        <div className={styles.books}>
-                            {books.map((book: GoogleBook, index: number) => (
-                                <Book
-                                    key={index}
-                                    volumeInfo={book.volumeInfo}
-                                />
-                            ))}
-                        </div>
+                        <>
+                            <h2 className={styles.total}>
+                                Найдено книг: {totalItems}
+                            </h2>
+                            <div className={styles.books}>
+                                {books.map(
+                                    (book: GoogleBook, index: number) => (
+                                        <Book
+                                            key={index}
+                                            volumeInfo={book.volumeInfo}
+                                        />
+                                    )
+                                )}
+                            </div>
+                        </>
                     ) : (
                         <>
                             <p className={styles.text}>
