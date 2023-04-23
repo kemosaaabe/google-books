@@ -41,6 +41,7 @@ const booksSlice = createSlice({
                 state.status = 'succeeded';
                 state.books = action.payload.items;
                 state.totalItems = action.payload.totalItems;
+                console.log(state.books);
             })
             .addCase(fetchBooks.pending, (state) => {
                 state.status = 'pending';

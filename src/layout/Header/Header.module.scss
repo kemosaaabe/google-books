@@ -1,15 +1,20 @@
 .header {
-    background: url('../../../public/assets/img/headerBg.jpg') no-repeat center;
+    background: url('../../../public/assets/img/header.jpg') no-repeat center;
     background-size: cover;
     color: #fff;
 
     display: flex;
     justify-content: center;
     padding: 30px;
+
+    @media (max-width: 400px) {
+        padding: 10px;
+    }
+
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
 }
 
 .headerInner {
-    width: 50%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -17,11 +22,16 @@
     h1 {
         font-weight: 600;
         margin-bottom: 20px;
+        font-size: 3rem;
     }
 
     .findField {
         width: 500px;
         position: relative;
+
+        @media (max-width: 600px) {
+            width: 100%;
+        }
 
         input {
             width: 100%;
@@ -30,7 +40,7 @@
             padding: 8px 10px;
             border: none;
             font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
+            font-size: 1.4rem;
             border-radius: 10px;
             transition: box-shadow 0.4s ease;
 
@@ -62,15 +72,27 @@
         width: 100%;
         justify-content: center;
 
+        @media (max-width: 400px) {
+            gap: 15px;
+        }
+
         label {
             margin-right: 5px;
+            font-size: 1.6rem;
+            display: block;
         }
 
         select {
             border-radius: 10px;
+            margin-top: 8px;
             width: 150px;
             border: none;
             padding: 3px 5px;
+            font-size: 1.4rem;
+
+            @media (max-width: 400px) {
+                width: 140px;
+            }
 
             &:focus {
                 outline: none;

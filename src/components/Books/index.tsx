@@ -9,87 +9,33 @@ import ContentLoader from 'react-content-loader';
 const Books = () => {
     const books = useAppSelector((state) => state.books.books);
     const status = useAppSelector((state) => state.books.status);
-    console.log(status);
 
     if (status === 'pending')
         return (
             <Container>
                 <div className={styles.booksWrapper}>
                     <div className={styles.books}>
-                        <ContentLoader
-                            rtl
-                            speed={1}
-                            width={980}
-                            height={802}
-                            viewBox="0 0 980 802"
-                            backgroundColor="#f3f3f3"
-                            foregroundColor="#ecebeb"
-                        >
-                            <rect
-                                x="0"
-                                y="0"
-                                rx="10"
-                                ry="10"
-                                width="220"
-                                height="389"
-                            />
-                            <rect
-                                x="245"
-                                y="0"
-                                rx="10"
-                                ry="10"
-                                width="220"
-                                height="389"
-                            />
-                            <rect
-                                x="490"
-                                y="0"
-                                rx="10"
-                                ry="10"
-                                width="220"
-                                height="389"
-                            />
-                            <rect
-                                x="735"
-                                y="0"
-                                rx="10"
-                                ry="10"
-                                width="220"
-                                height="389"
-                            />
-                            <rect
-                                x="0"
-                                y="413"
-                                rx="10"
-                                ry="10"
-                                width="220"
-                                height="389"
-                            />
-                            <rect
-                                x="245"
-                                y="413"
-                                rx="10"
-                                ry="10"
-                                width="220"
-                                height="389"
-                            />
-                            <rect
-                                x="490"
-                                y="413"
-                                rx="10"
-                                ry="10"
-                                width="220"
-                                height="389"
-                            />
-                            <rect
-                                x="735"
-                                y="413"
-                                rx="10"
-                                ry="10"
-                                width="220"
-                                height="389"
-                            />
-                        </ContentLoader>
+                        {[...new Array(8)].map((item, index) => (
+                            <ContentLoader
+                                rtl
+                                speed={1}
+                                width={220}
+                                height={389}
+                                viewBox="0 0 220 389"
+                                backgroundColor="#f3f3f3"
+                                foregroundColor="#ecebeb"
+                                key={index}
+                            >
+                                <rect
+                                    x="0"
+                                    y="0"
+                                    rx="10"
+                                    ry="10"
+                                    width="220"
+                                    height="389"
+                                />
+                            </ContentLoader>
+                        ))}
                     </div>
                 </div>
             </Container>
@@ -101,9 +47,9 @@ const Books = () => {
                 <div className={styles.booksWrapper}>
                     {books ? (
                         <div className={styles.books}>
-                            {books.map((book: GoogleBook) => (
+                            {books.map((book: GoogleBook, index: number) => (
                                 <Book
-                                    key={book.id}
+                                    key={index}
                                     volumeInfo={book.volumeInfo}
                                 />
                             ))}

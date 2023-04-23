@@ -16,7 +16,7 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.headerInner}>
-                <h1>Search for Books</h1>
+                <h1>Поиск книг</h1>
                 <div className={styles.findField}>
                     <input
                         type="text"
@@ -37,13 +37,13 @@ const Header = () => {
                 </div>
                 <div className={styles.filters}>
                     <div className={styles.categories}>
-                        <label htmlFor="bookCategories">Categories</label>
+                        <label htmlFor="bookCategories">Категории</label>
                         <select id="bookCategories">
                             <option value="all">all</option>
                         </select>
                     </div>
                     <div className={styles.sorting}>
-                        <label htmlFor="bookSorting">Sorting by</label>
+                        <label htmlFor="bookSorting">Сортировка</label>
                         <select id="bookSorting">
                             <option value="relevance">relevance </option>
                         </select>
