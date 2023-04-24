@@ -12,18 +12,19 @@ const Books = () => {
     const books = useAppSelector((state) => state.books.books);
     const status = useAppSelector((state) => state.books.status);
     const totalItems = useAppSelector((state) => state.books.totalItems);
+    const findValue = useAppSelector((state) => state.books.findValue);
 
     if (status === 'pending')
         return (
             <Container>
                 <div className={styles.booksWrapper}>
-                    {books.length ? (
+                    {books?.length ? (
                         <h2 className={styles.total}>
                             Найдено книг: {totalItems}
                         </h2>
                     ) : null}
                     <div className={styles.books}>
-                        {books.length ? (
+                        {books?.length ? (
                             <>
                                 {books.map(
                                     (book: GoogleBook, index: number) => (
@@ -65,7 +66,7 @@ const Books = () => {
         return (
             <Container>
                 <div className={styles.booksWrapper}>
-                    {books ? (
+                    {books?.length ? (
                         <>
                             <h2 className={styles.total}>
                                 Найдено книг: {totalItems}
@@ -81,10 +82,15 @@ const Books = () => {
                                 )}
                             </div>
                             <button
+                                className={
+                                    totalItems > books.length
+                                        ? styles.loadMoreBtn
+                                        : styles.buttonHidden
+                                }
                                 onClick={() =>
                                     dispatch(
                                         fetchMoreBooks({
-                                            findValue: 'java',
+                                            findValue: findValue,
                                             startIndex: books.length,
                                         })
                                     )
@@ -96,7 +102,8 @@ const Books = () => {
                     ) : (
                         <>
                             <p className={styles.text}>
-                                Ой... кажется книжек с таким названием нет :(
+                                Ой... кажется книжек с названием: "{findValue}"
+                                нет :(
                             </p>
                             <div className={styles.img}>
                                 <img src="/assets/img/nobooks.jpg" alt="book" />

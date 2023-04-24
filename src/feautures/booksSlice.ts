@@ -1,17 +1,26 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { GoogleBook } from '../types/book';
 
 const { REACT_APP_API_KEY } = process.env;
 
 interface StateProps {
-    books: any;
+    books: GoogleBook[];
+    findValue: string;
     totalItems: number;
     status: string;
     error: Error | null;
 }
 
+interface BooksAction {
+    items: GoogleBook[];
+    kind: string;
+    totalItems: number;
+}
+
 const initialState: StateProps = {
     books: [],
+    findValue: '',
     totalItems: 0,
     status: 'idle',
     error: null,
@@ -24,6 +33,7 @@ export const fetchBooks = createAsyncThunk(
             const { data } = await axios.get(
                 `https://www.googleapis.com/books/v1/volumes?q=${findValue}+intitle:${findValue}&maxResults=12&key=${REACT_APP_API_KEY}`
             );
+            console.log(data);
             return data;
         } catch (error) {
             return error;
@@ -50,19 +60,32 @@ export const fetchMoreBooks = createAsyncThunk(
 const booksSlice = createSlice({
     name: 'books',
     initialState,
-    reducers: {},
+    reducers: {
+        updateFindValue: (
+            state,
+            action: PayloadAction<{ findValue: string }>
+        ) => {
+            state.findValue = action.payload.findValue;
+        },
+    },
     extraReducers(builder) {
         builder
-            .addCase(fetchBooks.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.books = action.payload.items;
-                state.totalItems = action.payload.totalItems;
-            })
-            .addCase(fetchMoreBooks.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.books = state.books.concat(action.payload.items);
-                state.totalItems = action.payload.totalItems;
-            })
+            .addCase(
+                fetchBooks.fulfilled,
+                (state, action: PayloadAction<BooksAction>) => {
+                    state.status = 'succeeded';
+                    state.books = action.payload.items;
+                    state.totalItems = action.payload.totalItems;
+                }
+            )
+            .addCase(
+                fetchMoreBooks.fulfilled,
+                (state, action: PayloadAction<BooksAction>) => {
+                    state.status = 'succeeded';
+                    state.books = state.books.concat(action.payload.items);
+                    state.totalItems = action.payload.totalItems;
+                }
+            )
             .addCase(fetchBooks.pending, (state) => {
                 state.status = 'pending';
             })
@@ -72,4 +95,5 @@ const booksSlice = createSlice({
     },
 });
 
+export const { updateFindValue } = booksSlice.actions;
 export default booksSlice.reducer;

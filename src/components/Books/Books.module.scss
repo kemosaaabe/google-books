@@ -4,12 +4,36 @@
     margin-top: 20px;
 }
 
-.books {
-    padding: 35px 0;
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fill, min(220px, 100%));
-    gap: 24px 25px;
+.booksWrapper {
+    .books {
+        padding: 35px 0;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, min(220px, 100%));
+        gap: 24px 25px;
+    }
+
+    .loadMoreBtn {
+        cursor: pointer;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.12);
+        padding: 10px 20px;
+        border-radius: 10px;
+        background-color: transparent;
+        border: 1px solid rgb(210, 210, 210);
+        font-size: 1.6rem;
+        width: 200px;
+        display: block;
+        margin: 10px auto 30px;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    .buttonHidden {
+        display: none;
+    }
 }
 
 .text {

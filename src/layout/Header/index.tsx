@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './Header.module.scss';
-import { fetchBooks } from '../../feautures/booksSlice';
+import { fetchBooks, updateFindValue } from '../../feautures/booksSlice';
 import { useAppDispatch } from '../../app/hooks';
 
 const Header = () => {
@@ -11,6 +11,7 @@ const Header = () => {
     const getBooks = () => {
         if (!findValue) return;
         dispatch(fetchBooks(findValue));
+        dispatch(updateFindValue({ findValue }));
         setFindValue('');
     };
 
