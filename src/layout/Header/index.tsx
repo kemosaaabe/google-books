@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Listbox } from '@headlessui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import styles from './Header.module.scss';
 import { fetchBooks, updateFindValue } from '../../feautures/booksSlice';
 import { useAppDispatch } from '../../app/hooks';
+import { categories, filters } from './selectData';
+
+import Select from '../../components/UI/Select';
 
 const Header = () => {
     const dispatch = useAppDispatch();
     const [findValue, setFindValue] = React.useState('');
+    const [selectedCategory, setSelectedCategory] = React.useState(
+        categories[0]
+    );
 
     const getBooks = () => {
         if (!findValue) return;
@@ -39,16 +47,10 @@ const Header = () => {
                 </div>
                 <div className={styles.filters}>
                     <div className={styles.categories}>
-                        <label htmlFor="bookCategories">Категории</label>
-                        <select id="bookCategories">
-                            <option value="all">all</option>
-                        </select>
+                        <Select items={categories} />
                     </div>
                     <div className={styles.sorting}>
-                        <label htmlFor="bookSorting">Сортировка</label>
-                        <select id="bookSorting">
-                            <option value="relevance">relevance </option>
-                        </select>
+                        <Select items={filters} />
                     </div>
                 </div>
             </div>
