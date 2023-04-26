@@ -13,6 +13,8 @@ const Books = () => {
     const status = useAppSelector((state) => state.books.status);
     const totalItems = useAppSelector((state) => state.books.totalItems);
     const findValue = useAppSelector((state) => state.books.findValue);
+    const category = useAppSelector((state) => state.books.category);
+    const filter = useAppSelector((state) => state.books.filter);
 
     if (status === 'pending')
         return (
@@ -90,8 +92,10 @@ const Books = () => {
                                 onClick={() =>
                                     dispatch(
                                         fetchMoreBooks({
-                                            findValue: findValue,
+                                            findValue,
                                             startIndex: books.length,
+                                            category,
+                                            filter,
                                         })
                                     )
                                 }

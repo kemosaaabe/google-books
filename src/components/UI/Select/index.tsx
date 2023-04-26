@@ -3,23 +3,38 @@ import { Listbox } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import styles from './Select.module.scss';
+import { useAppDispatch } from '../../../app/hooks';
+import { updateFilter, updateCategory } from '../../../feautures/booksSlice';
+import { Item } from '../../../layout/Header/selectData';
 
 interface SelectProps {
-    items: {
-        id: number;
-        text: string;
-    }[];
+    type: 'filters' | 'categories';
+    items: Item[];
 }
 
-const Select: FC<SelectProps> = ({ items }) => {
-    const [selectedCategory, setSelectedCategory] = React.useState(items[0]);
+const Select: FC<SelectProps> = ({ type, items }) => {
+    const [selected, setSelected] = React.useState(items[0]);
+    const dispatch = useAppDispatch();
+
+    const onSelect = (item: Item) => {
+        setSelected(item);
+
+        switch (type) {
+            case 'filters':
+                dispatch(updateFilter({ filter: item.value }));
+                break;
+            case 'categories':
+                dispatch(updateCategory({ category: item.value }));
+                break;
+        }
+    };
 
     return (
-        <Listbox value={selectedCategory} onChange={setSelectedCategory}>
+        <Listbox value={selected} onChange={onSelect}>
             {({ open }) => (
                 <>
                     <Listbox.Button className={styles.listBoxSelected}>
-                        <span>{selectedCategory.text}</span>
+                        <span>{selected.text}</span>
                     </Listbox.Button>
                     <AnimatePresence>
                         {open && (

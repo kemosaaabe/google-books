@@ -1,10 +1,8 @@
-import React, { Fragment } from 'react';
-import { Listbox } from '@headlessui/react';
-import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
 
 import styles from './Header.module.scss';
 import { fetchBooks, updateFindValue } from '../../feautures/booksSlice';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { categories, filters } from './selectData';
 
 import Select from '../../components/UI/Select';
@@ -12,13 +10,12 @@ import Select from '../../components/UI/Select';
 const Header = () => {
     const dispatch = useAppDispatch();
     const [findValue, setFindValue] = React.useState('');
-    const [selectedCategory, setSelectedCategory] = React.useState(
-        categories[0]
-    );
+    const category = useAppSelector((state) => state.books.category);
+    const filter = useAppSelector((state) => state.books.filter);
 
     const getBooks = () => {
         if (!findValue) return;
-        dispatch(fetchBooks(findValue));
+        dispatch(fetchBooks({ findValue, category, filter }));
         dispatch(updateFindValue({ findValue }));
         setFindValue('');
     };
@@ -47,10 +44,10 @@ const Header = () => {
                 </div>
                 <div className={styles.filters}>
                     <div className={styles.categories}>
-                        <Select items={categories} />
+                        <Select items={categories} type="categories" />
                     </div>
                     <div className={styles.sorting}>
-                        <Select items={filters} />
+                        <Select items={filters} type="filters" />
                     </div>
                 </div>
             </div>

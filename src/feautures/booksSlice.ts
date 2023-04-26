@@ -7,6 +7,8 @@ const { REACT_APP_API_KEY } = process.env;
 interface StateProps {
     books: GoogleBook[];
     findValue: string;
+    category: string;
+    filter: string;
     totalItems: number;
     status: string;
     error: Error | null;
@@ -18,9 +20,18 @@ interface BooksAction {
     totalItems: number;
 }
 
+interface FetchData {
+    findValue: string;
+    startIndex?: number;
+    category: string;
+    filter: string;
+}
+
 const initialState: StateProps = {
     books: [],
     findValue: '',
+    category: 'all',
+    filter: 'relevance',
     totalItems: 0,
     status: 'idle',
     error: null,
@@ -28,10 +39,13 @@ const initialState: StateProps = {
 
 export const fetchBooks = createAsyncThunk(
     'books/fetchBooks',
-    async (findValue: string) => {
+    async (fetchData: FetchData) => {
+        const { findValue, category, filter } = fetchData;
+        const categoryInUrl = category === 'all' ? '' : category;
         try {
             const { data } = await axios.get(
-                `https://www.googleapis.com/books/v1/volumes?q=${findValue}+intitle:${findValue}&maxResults=12&key=${REACT_APP_API_KEY}`
+                `https://www.googleapis.com/books/v1/volumes?q=${findValue}+intitle:${findValue}+subject:
+                ${categoryInUrl}&orderBy=${filter}&maxResults=12&key=${REACT_APP_API_KEY}`
             );
             console.log(data);
             return data;
@@ -43,12 +57,14 @@ export const fetchBooks = createAsyncThunk(
 
 export const fetchMoreBooks = createAsyncThunk(
     'books/fetchMoreBooks',
-    async (fetchData: { findValue: string; startIndex: number }) => {
-        const { findValue, startIndex } = fetchData;
+    async (fetchData: FetchData) => {
+        const { findValue, startIndex, category, filter } = fetchData;
+        const categoryInUrl = category === 'all' ? '' : category;
+
         try {
             const { data } = await axios.get(
-                `https://www.googleapis.com/books/v1/volumes?q=${findValue}+intitle:${findValue}
-                &startIndex=${startIndex}&maxResults=12&key=${REACT_APP_API_KEY}`
+                `https://www.googleapis.com/books/v1/volumes?q=${findValue}+intitle:${findValue}+subject:
+                ${categoryInUrl}&orderBy=${filter}&startIndex=${startIndex}&maxResults=12&key=${REACT_APP_API_KEY}`
             );
             return data;
         } catch (error) {
@@ -66,6 +82,15 @@ const booksSlice = createSlice({
             action: PayloadAction<{ findValue: string }>
         ) => {
             state.findValue = action.payload.findValue;
+        },
+        updateFilter: (state, action: PayloadAction<{ filter: string }>) => {
+            state.filter = action.payload.filter;
+        },
+        updateCategory: (
+            state,
+            action: PayloadAction<{ category: string }>
+        ) => {
+            state.category = action.payload.category;
         },
     },
     extraReducers(builder) {
@@ -95,5 +120,6 @@ const booksSlice = createSlice({
     },
 });
 
-export const { updateFindValue } = booksSlice.actions;
+export const { updateFindValue, updateFilter, updateCategory } =
+    booksSlice.actions;
 export default booksSlice.reducer;
