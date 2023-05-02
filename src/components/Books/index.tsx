@@ -112,7 +112,7 @@ const Books = () => {
                                 нет :(
                             </p>
                             <div className={styles.img}>
-                                <img src="/assets/img/nobooks.jpg" alt="book" />
+                                <img src="assets/img/nobooks.jpg" alt="book" />
                             </div>
                         </>
                     )}
@@ -124,7 +124,7 @@ const Books = () => {
         <div className={styles.booksWrapper}>
             <p className={styles.text}>Напишите свой первый запросик</p>
             <div className={styles.img}>
-                <img src="/assets/img/write.jpg" alt="book" />
+                <img src="assets/img/write.jpg" alt="book" />
             </div>
         </div>
     );

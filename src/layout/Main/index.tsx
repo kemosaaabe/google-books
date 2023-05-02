@@ -7,8 +7,8 @@ import DetailBook from '../../components/DetailBook';
 const Main: FC = () => {
     return (
         <Routes>
-            <Route path="/" element={<Books />} />
-            <Route path="/book/:bookId" element={<DetailBook />} />
+            <Route path="/google-books/" element={<Books />} />
+            <Route path="/google-books/book/:bookId" element={<DetailBook />} />
         </Routes>
     );
 };

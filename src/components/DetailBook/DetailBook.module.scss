@@ -1,3 +1,14 @@
+.arrow {
+    margin-top: 30px;
+    display: block;
+    width: 30px;
+
+    svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+
 .book {
     display: grid;
     grid-template-columns: 1fr 3fr;

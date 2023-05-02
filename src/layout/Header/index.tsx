@@ -20,7 +20,7 @@ const Header = () => {
         dispatch(fetchBooks({ findValue, category, filter }));
         dispatch(updateFindValue({ findValue }));
         setFindValue('');
-        navigate('/');
+        navigate('/google-books/');
     };
 
     return (
@@ -40,7 +40,7 @@ const Header = () => {
                     />
 
                     <img
-                        src="/assets/img/icons/search.svg"
+                        src="assets/img/icons/search.svg"
                         alt="search"
                         onClick={getBooks}
                     />

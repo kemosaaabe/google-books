@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom';
+
 import { useParams } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 
 import styles from './DetailBook.module.scss';
 
 import Container from '../Container';
-import { IconBook } from './icon';
+import { IconBook, ArrowBack } from './icon';
 
 const DetailBook = () => {
     const { bookId } = useParams();
@@ -15,6 +17,9 @@ const DetailBook = () => {
 
     return (
         <Container>
+            <Link to="/google-books/" className={styles.arrow}>
+                <ArrowBack />
+            </Link>
             {book ? (
                 <div className={styles.book}>
                     <div className={styles.bookImg}>
@@ -55,7 +60,7 @@ const DetailBook = () => {
                         а тут книжечки не сохранятся в базу данных :(
                     </h2>
                     <div className={styles.img}>
-                        <img src="/assets/img/nobooks.jpg" alt="book" />
+                        <img src="assets/img/nobooks.jpg" alt="book" />
                     </div>
                 </div>
             )}

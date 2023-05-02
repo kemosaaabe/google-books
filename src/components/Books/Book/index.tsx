@@ -15,7 +15,7 @@ interface BookProps {
 const Book: FC<BookProps> = ({ id, volumeInfo }) => {
     return (
         <motion.div whileHover={{ scale: 1.03 }}>
-            <Link to={`/book/${id}`} className={styles.book}>
+            <Link to={`/google-books/book/${id}`} className={styles.book}>
                 <div className={styles.img}>
                     {volumeInfo.imageLinks ? (
                         <img
