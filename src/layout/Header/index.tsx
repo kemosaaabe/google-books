@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Header.module.scss';
 import { fetchBooks, updateFindValue } from '../../feautures/booksSlice';
@@ -12,12 +13,14 @@ const Header = () => {
     const [findValue, setFindValue] = React.useState('');
     const category = useAppSelector((state) => state.books.category);
     const filter = useAppSelector((state) => state.books.filter);
+    const navigate = useNavigate();
 
     const getBooks = () => {
         if (!findValue) return;
         dispatch(fetchBooks({ findValue, category, filter }));
         dispatch(updateFindValue({ findValue }));
         setFindValue('');
+        navigate('/');
     };
 
     return (

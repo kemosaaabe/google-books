@@ -47,7 +47,6 @@ export const fetchBooks = createAsyncThunk(
                 `https://www.googleapis.com/books/v1/volumes?q=${findValue}+intitle:${findValue}+subject:
                 ${categoryInUrl}&orderBy=${filter}&maxResults=12&key=${REACT_APP_API_KEY}`
             );
-            console.log(data);
             return data;
         } catch (error) {
             return error;
@@ -112,6 +111,7 @@ const booksSlice = createSlice({
                 }
             )
             .addCase(fetchBooks.pending, (state) => {
+                state.books = [];
                 state.status = 'pending';
             })
             .addCase(fetchMoreBooks.pending, (state) => {

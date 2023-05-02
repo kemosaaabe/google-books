@@ -7,6 +7,8 @@
     flex-direction: column;
     cursor: pointer;
     height: 100%;
+    text-decoration: none;
+    color: #000;
 
     .img {
         align-self: center;
@@ -48,6 +50,9 @@
 
         .title {
             font-size: 1.4rem;
+            max-height: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 }

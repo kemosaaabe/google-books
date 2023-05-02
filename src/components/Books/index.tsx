@@ -33,6 +33,7 @@ const Books = () => {
                                         <Book
                                             key={index}
                                             volumeInfo={book.volumeInfo}
+                                            id={book.id}
                                         />
                                     )
                                 )}
@@ -79,6 +80,7 @@ const Books = () => {
                                         <Book
                                             key={index}
                                             volumeInfo={book.volumeInfo}
+                                            id={book.id}
                                         />
                                     )
                                 )}
