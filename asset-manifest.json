@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/google-books/static/css/main.f351054b.css",
+    "main.css": "/google-books/static/css/main.786d838f.css",
     "main.js": "/google-books/static/js/main.02319d09.js",
     "static/media/header.jpg": "/google-books/static/media/header.39b310b1e854ec8d3f85.jpg",
     "index.html": "/google-books/index.html",
-    "main.f351054b.css.map": "/google-books/static/css/main.f351054b.css.map",
+    "main.786d838f.css.map": "/google-books/static/css/main.786d838f.css.map",
     "main.02319d09.js.map": "/google-books/static/js/main.02319d09.js.map"
   },
   "entrypoints": [
-    "static/css/main.f351054b.css",
+    "static/css/main.786d838f.css",
     "static/js/main.02319d09.js"
   ]
 }
